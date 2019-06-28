@@ -41,6 +41,8 @@ class Symbol(list):
                 arg_val_str = str([self.__trans_val(one) for one in arg_val])
             elif isinstance(arg_val, Decimal) or isinstance(arg_val, int):
                 arg_val_str = str(arg_val)
+            elif isinstance(arg_val, str):
+                arg_val_str = '"{}"'.format(arg_val)
             else:
                 raise Exception(type(arg_val))
 
