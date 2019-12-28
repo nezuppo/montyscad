@@ -12,49 +12,48 @@ class Scad(list):
 class Symbol(list):
     _one_indent = '  '
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, name, *args, **kwargs):
         super().__init__()
 
         self._name = name
+        self.args = args
         self.kwargs = kwargs
         self.indent = 0
 
-    def __trans_val(self, val):
+    def __val2str(self, val):
+        assert not isinstance(val, float), ('use Decimal instead of float', val)
+
+        if isinstance(val, bool):
+            # bool must be processed before int
+            return 'true' if val else 'false'
         if isinstance(val, int):
-            return val
+            return str(val)
         if isinstance(val, Decimal):
-            return float(val)
+            return str(val)
+        if isinstance(val, str):
+            return '"{}"'.format(val)
+        if isinstance(val, list) or isinstance(val, np.ndarray):
+            return '[{}]'.format(', '.join([self.__val2str(one) for one in val]))
 
-        raise Exception(val)
-
-    def __get_arg_strs(self):
-        arg_strs = []
-
-        for arg_name, arg_val in self.kwargs.items():
-            if False:
-                pass
-            elif isinstance(arg_val, float):
-                raise Exception(('forbidden', arg_name, arg_val))
-            elif isinstance(arg_val, bool):
-                arg_val_str = 'true' if arg_val else 'false'
-            elif isinstance(arg_val, list) or isinstance(arg_val, np.ndarray):
-                arg_val_str = str([self.__trans_val(one) for one in arg_val])
-            elif isinstance(arg_val, Decimal) or isinstance(arg_val, int):
-                arg_val_str = str(arg_val)
-            elif isinstance(arg_val, str):
-                arg_val_str = '"{}"'.format(arg_val)
-            else:
-                raise Exception(type(arg_val))
-
-            arg_strs.append('{}={}'.format(arg_name, arg_val_str))
-
-        return arg_strs
+        raise Exception(type(val), val)
 
     def _str_1st_line(self):
+        arg_strs = []
+
+        arg_strs += [
+            self.__val2str(arg)
+            for arg in self.args
+        ]
+
+        arg_strs += [
+            '{}={}'.format(name, self.__val2str(val))
+            for name, val in self.kwargs.items()
+        ]
+
         return '{}{}({})'.format(
             self._one_indent * self.indent,
             self._name,
-            ', '.join(self.__get_arg_strs())
+            ', '.join(arg_strs)
         )
 
     def __str__(self):
