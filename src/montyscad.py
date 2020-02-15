@@ -76,7 +76,10 @@ class Symbol(list):
         return self
 
 class Module(Symbol):
-    def __init__(self, name):
+    def __init__(self, name=None):
+        if not name:
+            name = self.__class__.__name__
+
         super().__init__(name)
 
     def _str_1st_line(self):
