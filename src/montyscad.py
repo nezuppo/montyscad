@@ -28,6 +28,8 @@ class Symbol(list):
             return 'true' if val else 'false'
         if isinstance(val, int):
             return str(val)
+        if isinstance(val, np.int64):
+            return str(val)
         if isinstance(val, Decimal):
             return str(val)
         if isinstance(val, str):
