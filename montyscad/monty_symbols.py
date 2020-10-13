@@ -3,8 +3,9 @@
 from montyscad import Symbol as _Symbol
 
 _symbol_names = [
-    'cube',
+    'circle',
     'color',
+    'cube',
     'cylinder',
     'difference',
     'intersection',
