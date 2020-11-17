@@ -19,6 +19,7 @@ class Symbol(list):
         self.args = args
         self.kwargs = kwargs
         self.indent = 0
+        self.modifier = None
 
     def __val2str(self, val):
         assert not isinstance(val, float), ('use Decimal instead of float', val)
@@ -52,8 +53,9 @@ class Symbol(list):
             for name, val in self.kwargs.items()
         ]
 
-        return '{}{}({})'.format(
+        return '{}{}{}({})'.format(
             self._one_indent * self.indent,
+            self.modifier if self.modifier is not None else '',
             self._name,
             ', '.join(arg_strs)
         )
@@ -70,6 +72,10 @@ class Symbol(list):
                 string += '{}\n'.format(child)
             string += '{}}}'.format(self._one_indent * self.indent)
         return string
+
+    def modify(self, modifier='#'):
+        self.modifier = modifier
+        return self
 
     def add_others(self, *args):
         for other in args:
