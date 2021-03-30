@@ -60,6 +60,9 @@ class Symbol(list):
             ', '.join(arg_strs)
         )
 
+    def __call__(self, *args):
+        return self.add_others(*args)
+
     def __str__(self):
         string = self._str_1st_line()
 
