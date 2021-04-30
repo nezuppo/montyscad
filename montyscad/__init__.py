@@ -9,7 +9,7 @@ class Scad(list):
             for one in self:
                 f.write(str(one) + '\n')
 
-to_fn = lambda name: '${}'.format(name[2:]) if name.startswith('__') else name
+to_special_var_name = lambda name: '${}'.format(name[2:]) if name.startswith('__') else name
 
 class Symbol(list):
     _one_indent = '  '
@@ -51,7 +51,7 @@ class Symbol(list):
         ]
 
         arg_strs += [
-            '{}={}'.format(to_fn(name), self.__val2str(val))
+            '{}={}'.format(to_special_var_name(name), self.__val2str(val))
             for name, val in self.kwargs.items()
         ]
 
