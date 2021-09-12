@@ -20,9 +20,6 @@ example.py::
 
   #!/usr/bin/env python3
 
-  import sys
-  sys.path.append('/mnt/c/Users/nezup/OneDrive/agent/bk-all/Desktop/2021-0911-montyscad-readme/montyscad')
-
   from decimal import Decimal
   from montyscad import Scad
   from montyscad import monty_symbols as ms
@@ -52,7 +49,8 @@ generate scad file
 
   $ python3 example.py
 
-  $ cat /tmp/example.scad
+/tmp/example.scad::
+
   $fn=36;
   union() {
     difference() {
