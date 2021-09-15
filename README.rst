@@ -9,7 +9,7 @@ Install dependent package
 
 .. sourcecode::
 
-  $ pipenv install numpy
+  $ pip install numpy
 
 Usage
 ===================
@@ -24,13 +24,14 @@ example.py::
   from montyscad import Scad
   from montyscad import monty_symbols as ms
 
-  scad = Scad()
-  scad.append('$fn=36;')
   cube = ms.cube(size=30, center=True)
   sphere = ms.sphere(r=Decimal('20.1'))
   cylinder = ms.cylinder(40, r=10)
 
-  union = ms.union()(
+  scad = Scad()
+  scad += [
+    '$fn=36;',
+    ms.union()(
       ms.difference()(
         cube,
         sphere
@@ -38,9 +39,8 @@ example.py::
       ms.translate([0, 0, 30])(
         cylinder
       )
-  )
-
-  scad.append(union)
+    )
+  ]
   scad.write('/tmp/example.scad')
 
 generate scad file
