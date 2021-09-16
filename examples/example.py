@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 
-import montyscad as ms
+from decimal import Decimal
+from montyscad import Scad
+from montyscad import monty_symbols as ms
 
-cube = ms.Symbol('cube', size=30, center=True)
-sphere = ms.Symbol('sphere', r=20)
-cylinder = ms.Symbol('cylinder', h=40, r=10)
+cube = ms.cube(size=30, center=True)
+sphere = ms.sphere(r=Decimal('20.1'))
+cylinder = ms.cylinder(40, r=10)
 
-difference = ms.Symbol('difference')
-difference.append(cube)
-difference.append(sphere)
-
-translate = ms.Symbol('translate', v=[0, 0, 30])
-translate.append(cylinder)
-
-union = ms.Symbol('union')
-union.append(difference)
-union.append(translate)
-
-print(union)
+scad = Scad()
+scad += [
+  '$fn=36;',
+  ms.union()(
+    ms.difference()(
+      cube,
+      sphere
+    ),
+    ms.translate([0, 0, 30])(
+      cylinder
+    )
+  )
+]
+scad.write('/tmp/example.scad')
