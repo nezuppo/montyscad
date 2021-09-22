@@ -10,6 +10,8 @@ Welcome to montyscad's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   contents/introduction/main.rst
+   contents/install/main.rst
 
 
 Indices and tables
