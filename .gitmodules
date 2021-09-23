@@ -1,4 +1,0 @@
-[submodule "doc/build/html"]
-	path = doc/build/html
-	url = https://github.com/nezuppo/montyscad.git
-	branch = gh-pages
