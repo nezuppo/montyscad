@@ -40,7 +40,11 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/main.html">montyscad とは</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">インストール</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">インストール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">依存パッケージをインストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#montyscad">montyscad をインストール</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -69,7 +73,53 @@
              
   <section id="id1">
 <h1>インストール<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク"></a></h1>
-<p>執筆中です。もうしばらくお待ちください。</p>
+<p>以下の環境で montyscad を使えるようにするためのインストール手順を記載します。</p>
+<ul class="simple">
+<li><p>Ubuntu 20.04.3 LTS</p></li>
+<li><p>Python 3.8.10</p></li>
+</ul>
+<p>その他の環境では試していませんが、Ubuntu + Python3 系であれば同じ手順で問題ないかと思われます。</p>
+<section id="id2">
+<h2>依存パッケージをインストール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク"></a></h2>
+<p>montyscad には numpy が必要なのでインストール</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt install python3-numpy
+</pre></div>
+</div>
+</section>
+<section id="montyscad">
+<h2>montyscad をインストール<a class="headerlink" href="#montyscad" title="このヘッドラインへのパーマリンク"></a></h2>
+<p>montyscad リポジトリの中の montyscad ディレクトリ (Python パッケージ) を
+python のモジュール検索パスが通っているディレクトリに置くだけです。</p>
+<p>以下のようにカレントディレクトリに置く方法が簡単です。</p>
+<p>GitHub の montyscad リポジトリをテンポラリなディレクトリに clone</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/nezuppo/montyscad.git ./tmp-montyscad-repo/
+</pre></div>
+</div>
+<p>clone 先として <code class="docutils literal notranslate"><span class="pre">./tmp-montyscad-repo/</span></code> を指定しているので、このディレクトリに clone されます。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -la
+total 12
+drwxr-xr-x 3 test test 4096 Sep 24 21:51 .
+drwxr-xr-x 3 test test 4096 Sep 24 20:49 ..
+drwxr-xr-x 5 test test 4096 Sep 24 21:51 tmp-montyscad-repo
+</pre></div>
+</div>
+<p>リポジトリの montyscad ディレクトリ (Python パッケージ) をカレントディレクトリにコピー</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cp -r tmp-montyscad-repo/montyscad ./
+</pre></div>
+</div>
+<p>カレントディレクトリは以下の状態となります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -la
+total 16
+drwxr-xr-x 4 test test 4096 Sep 24 21:53 .
+drwxr-xr-x 3 test test 4096 Sep 24 20:49 ..
+drwxr-xr-x 2 test test 4096 Sep 24 21:53 montyscad
+drwxr-xr-x 5 test test 4096 Sep 24 21:51 tmp-montyscad-repo
+</pre></div>
+</div>
+<p>以上によりカレントディレクトリで montyscad パッケージが使えるようになるので
+[<a class="reference internal" href="../introduction/main.html"><span class="doc">montyscad とは</span></a>] で紹介した example.py のように montyscad
+を使った Python スクリプトで 3D CAD モデル を作成することができます。</p>
+</section>
 </section>
 
 
