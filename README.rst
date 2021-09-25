@@ -4,6 +4,8 @@ montyscad
 
 montyscad is python package for creating solid 3D CAD models with OpenSCAD
 
+also refer to [`montyscad documents <https://nezuppo.github.io/montyscad/index.html>`_] written in Japanese
+
 Install dependent package
 ==============================
 
