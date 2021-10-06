@@ -12,3 +12,4 @@ Welcome to montyscad's documentation!
 
    contents/introduction/main.rst
    contents/install/main.rst
+   contents/scad_class/main.rst
