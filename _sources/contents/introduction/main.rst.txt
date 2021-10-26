@@ -3,6 +3,8 @@ montyscad とは
 
 montyscad は 3D CAD モデルを Python で作成し OpenSCAD スクリプトを生成するための Python パッケージです。
 
+https://github.com/nezuppo/montyscad で公開しています。
+
 サンプルプログラム
 =========================
 
