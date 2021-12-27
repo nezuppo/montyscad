@@ -43,7 +43,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../install/main.html">インストール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../scad_class/main.html">Scad クラスについて</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../symbol_class/main.html">Symbol クラスについて</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">monty_symbols モジュールについて</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">monty_symbols モジュールについて</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">含まれているクラス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#symbol">使い方を Symbol クラスと比較</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -72,7 +76,57 @@
              
   <section id="monty-symbols">
 <h1>monty_symbols モジュールについて<a class="headerlink" href="#monty-symbols" title="このヘッドラインへのパーマリンク"></a></h1>
-<p>執筆中です。しばらくお待ち下さい。</p>
+<p>monty_symbols モジュールには OpenSCAD の circle や cube , linear_extrude, translate
+等に対応したクラスが含まれています。</p>
+<p>これらのクラスは Symbol クラスから派生しています。</p>
+<section id="id1">
+<h2>含まれているクラス<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク"></a></h2>
+<p>クラスは <cite>monty_symbols.py</cite> の <cite>_symbol_names</cite> で定義されています。2021/12/27 現在の定義は以下の通りです。(少しずつ追加していく予定です)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_symbol_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;circle&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;color&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;cube&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;cylinder&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;difference&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;intersection&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;linear_extrude&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;import&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;minkowski&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;mirror&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;offset&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;projection&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rotate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sphere&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;square&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;translate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;union&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>ここに含まれていないものについては Symbol クラスを使います。[<a class="reference internal" href="../symbol_class/main.html"><span class="doc">Symbol クラスについて</span></a>] を参照して下さい。</p>
+</section>
+<section id="symbol">
+<h2>使い方を Symbol クラスと比較<a class="headerlink" href="#symbol" title="このヘッドラインへのパーマリンク"></a></h2>
+<p>translate、cube を例にとります。</p>
+<p>まず Symbol クラスを使う場合は以下のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">montyscad</span> <span class="kn">import</span> <span class="n">Symbol</span>
+
+<span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;translate&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])(</span>
+    <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;cube&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>同じことを monty_symbols を使う場合は以下のようになります。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">montyscad</span> <span class="kn">import</span> <span class="n">monty_symbols</span> <span class="k">as</span> <span class="n">ms</span>
+
+<span class="n">ms</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])(</span>
+    <span class="n">ms</span><span class="o">.</span><span class="n">cube</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>このように monty_symbols を使うと Symbol クラスを使う場合と比べタイピング時の文字数が減り、
+コーディングについても OpenSCAD スクリプトにより近いものとなります。</p>
+</section>
 </section>
 
 
