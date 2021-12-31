@@ -15,3 +15,4 @@ Welcome to montyscad's documentation!
    contents/scad_class/main.rst
    contents/symbol_class/main.rst
    contents/monty_symbols_module/main.rst
+   contents/module_class/main.rst
