@@ -16,6 +16,7 @@ _symbol_names = [
     'offset',
     'projection',
     'rotate',
+    'rotate_extrude',
     'sphere',
     'square',
     'translate',
