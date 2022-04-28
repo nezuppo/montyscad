@@ -59,3 +59,24 @@ def layers(layers, cfmode=None):
 
     return union
 
+def rcorner(r, quadrant):
+    symbol = ColorFields(
+        ms.square(np.array([1, 1]) * (r * 2)),
+        [
+            ms.translate([r, r])(ms.circle(r=r)),
+            ms.translate([r, 0])(ms.square([r, r])),
+            ms.translate([r, r])(ms.square([r, r])),
+            ms.translate([0, r])(ms.square([r, r])),
+        ],
+    ).get_symbol(cf_mode=ColorFields.PLAIN)
+
+    assert quadrant in [1, 2, 3, 4], quadrant
+    rotate = (quadrant - 1) * 90
+    if rotate:
+        symbol = ms.rotate(rotate, [0, 0, 1])(
+            symbol
+        )
+
+    return symbol
+
+

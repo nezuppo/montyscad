@@ -70,42 +70,26 @@ class ColorFields(list):
             symbol = self.__get_diff(height, self._pluses2[i],
                     self._pluses2[i + 1:])
             union.append(symbol)
-#
-        """ <
-        all_sets = self.union_color_sets + self.minus_color_sets
-        len_colors = len(self.colors)
-
-        len_all = len(all_sets)
-        len_target = len_all if cf_mode == self.ALL else len(self.union_color_sets)
-
-        for i in range(len_target):
-            if isinstance(all_sets[i], ColorSet):
-                if all_sets[i].color:
-                    color = all_sets[i].color
-                else:
-                    color = self.colors[self.next_color_index]
-                    ColorFields.next_color_index = (ColorFields.next_color_index + 1) % len_colors
-                symbol = all_sets[i].symbol
-            else:
-                color = None
-                symbol = all_sets[i]
-
-            diff = Symbol('difference')
-            diff.append(symbol)
-            for j in range(i + 1, len_all):
-                if isinstance(all_sets[j], ColorSet):
-                    diff.append(all_sets[j].symbol)
-                else:
-                    diff.append(all_sets[j])
-
-            if height:
-                diff = Symbol('linear_extrude', height).add_others(diff)
-            if color:
-                diff = Symbol('color', color).add_others(diff)
-            union.append(diff)
-        """
 
         return union
+
+    def __get_symbol_plain(self, height):
+        assert self._pluses
+        symbol = ms.union()(*self._pluses) if 1 < len(self._pluses) else self._pluses[0]
+
+        if self._minuses:
+            symbol = ms.difference()(
+                symbol,
+                *self._minuses
+            )
+
+        if self._pluses2:
+            symbol = ms.union()(
+                symbol,
+                *self._pluses2
+            )
+
+        return symbol
 
     def _insert_in_list(self, target_list, symbol, index):
         if index is None:
