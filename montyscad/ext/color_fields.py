@@ -89,6 +89,8 @@ class ColorFields(list):
                 *self._pluses2
             )
 
+        symbol = ms.linear_extrude(height)(symbol)
+
         return symbol
 
     def _insert_in_list(self, target_list, symbol, index):
