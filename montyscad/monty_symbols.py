@@ -8,9 +8,10 @@ _symbol_names = [
     'cube',
     'cylinder',
     'difference',
+    'hull',
+#   'import', # 'import' is python keyword, so it cannot be used.
     'intersection',
     'linear_extrude',
-    'import',
     'minkowski',
     'mirror',
     'offset',
