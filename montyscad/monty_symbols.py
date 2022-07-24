@@ -20,6 +20,7 @@ _symbol_names = [
     'rotate_extrude',
     'sphere',
     'square',
+    'text',
     'translate',
     'union',
 ]
