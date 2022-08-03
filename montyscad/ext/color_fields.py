@@ -120,3 +120,12 @@ class ColorFields(list):
         if cf_mode == self.PLAIN:
             return self.__get_symbol_plain(height)
         raise Exception(cf_mode)
+
+    def _translate_symbols(self, translate_v, symbols):
+        for i, one in enumerate(symbols):
+            symbols[i] = ms.translate(translate_v)(one)
+
+    def translate(self, translate_v):
+        self._translate_symbols(translate_v, self._pluses)
+        self._translate_symbols(translate_v, self._minuses)
+        self._translate_symbols(translate_v, self._pluses2)
