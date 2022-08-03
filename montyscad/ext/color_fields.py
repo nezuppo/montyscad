@@ -41,6 +41,15 @@ class ColorFields(list):
         else:
             raise Exception(type(symbols))
 
+    def __iadd__(self, other):
+        assert isinstance(other, ColorFields), type(other)
+
+        self._pluses  += other._pluses
+        self._minuses += other._minuses
+        self._pluses2 += other._pluses2
+
+        return self
+
     def __get_diff(self, height, target, follows):
         symbol = ms.difference()
         symbol.append(target)
