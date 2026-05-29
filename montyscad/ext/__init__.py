@@ -4,6 +4,7 @@ import numpy as np
 from montyscad import monty_symbols as ms
 from montyscad.ext.color_fields import ColorFields
 from montyscad.ext.rounded_cube import RoundedCube
+from montyscad.ext.rounded_square import RoundedSquare
 
 def rotate_pos(a, v, pos, symbol):
     '''
